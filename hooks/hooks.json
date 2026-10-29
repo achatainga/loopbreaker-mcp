@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json.schemastore.org/mcp-hooks.json",
+  "version": "1.0.0",
+  "name": "loopbreaker-hooks",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "tool == 'edit_file' || tool == 'write_file'",
+        "condition": "path.match(/\\.(test|spec)\\.[jt]sx?$/) || path.includes('conftest.py')",
+        "action": "block",
+        "exitCode": 2,
+        "message": "🛑 [LOOPBREAKER FIREWALL]: Test suite is cryptographically locked during implementation phase. You are forbidden from modifying test assertions."
+      },
+      {
+        "matcher": "tool == 'run_command'",
+        "condition": "command.match(/git\\s+(reset\\s+--hard|clean\\s+-fdx)/)",
+        "action": "block",
+        "exitCode": 2,
+        "message": "🛑 [LOOPBREAKER FIREWALL]: Destructive git reset/clean blocked. Use loopbreaker_safe_stash instead."
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "tool == 'edit_file' || tool == 'write_file'",
+        "handler": "loopbreaker_detect_death_spiral"
+      }
+    ],
+    "Stop": [
+      {
+        "handler": "loopbreaker_verify_held_out"
+      }
+    ]
+  }
+}
