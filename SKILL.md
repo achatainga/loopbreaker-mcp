@@ -1,5 +1,5 @@
 ---
-name: loopbreaker-mcp
+name: loopbreaker
 version: 1.0.0
 description: "Out-of-band AST test grader, reward-hacking firewall & anti-death-spiral engine. Prevents AI coding agents from burning $15-$30 in circular debugging loops and mutating test assertions."
 author: "Alejandro Chataing <a.chataing.a@gmail.com>"
