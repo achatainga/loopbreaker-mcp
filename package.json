@@ -1,6 +1,6 @@
 {
   "name": "@achatainga/loopbreaker-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Anti-Death-Spiral Firewall & Cryptographic Test-File Locking for Autonomous AI Agents",
   "type": "module",
   "main": "src/engine.mjs",
